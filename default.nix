@@ -11,6 +11,7 @@ let
   callPackages = callPackagesWith (pkgs // self.nixchem);
 
   self.nixchem = rec {
+    openblas = pkgs.openblas.override {blas64 = false;};
     sisi4s = callPackage ./src/sisi4s.nix { };
     cc4s = callPackage ./src/cc4s.nix { };
     ctf = callPackage ./src/ctf.nix { };
@@ -22,4 +23,4 @@ let
     lapackpp = callPackage ./src/lapackpp.nix { };
   };
 
-in self.nixchem // pkgs
+in self.nixchem
