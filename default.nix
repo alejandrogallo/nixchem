@@ -30,6 +30,7 @@ let
     testsweeper = callPackage ./src/testsweeper.nix { };
     #
     xcrysden = callPackage ./src/xcrysden.nix { };
+    py4vasp = callPackage ./src/py4vasp.nix { };
   };
 
 in self.nixchem
