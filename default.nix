@@ -11,7 +11,7 @@ let
   callPackages = callPackagesWith (pkgs // self.nixchem);
 
   self.nixchem = rec {
-    openblas = pkgs.openblas.override {blas64 = false;};
+    openblas = pkgs.openblas.override { blas64 = false; };
     sisi4s = callPackage ./src/sisi4s.nix { };
     cc4s = callPackage ./src/cc4s.nix { };
     ctf = callPackage ./src/ctf.nix { };
@@ -21,6 +21,11 @@ let
     BTAS = callPackage ./src/btas.nix { };
     blaspp = callPackage ./src/blaspp.nix { };
     lapackpp = callPackage ./src/lapackpp.nix { };
+    blt = callPackage ./src/blt.nix { };
+    umpire = callPackage ./src/umpire.nix { };
+    camp = callPackage ./src/camp.nix { };
+    kit-cmake = callPackage ./src/kit-cmake.nix { };
+    linalg-cmake-modules = callPackage ./src/linalg-cmake-modules.nix { };
   };
 
 in self.nixchem

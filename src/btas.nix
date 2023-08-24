@@ -1,5 +1,5 @@
 { stdenv, lib, autoconf, automake, fetchFromGitHub, openblas, lapack, cmake
-, boost, writeText, blaspp, lapackpp }:
+, boost, writeText, blaspp, lapackpp, kit-cmake, linalg-cmake-modules }:
 
 let
 
@@ -18,28 +18,14 @@ let
     -)
     -FetchContent_MakeAvailable(vg_cmake_kit)
     -list(APPEND CMAKE_MODULE_PATH "''${vg_cmake_kit_SOURCE_DIR}/modules")
-    +set(vg_cmake_kit_SOURCE_DIR "${kit-cmake-src}")
-    +list(APPEND CMAKE_MODULE_PATH "${kit-cmake-src}/modules")
+    +set(vg_cmake_kit_SOURCE_DIR "${kit-cmake}")
+    +list(APPEND CMAKE_MODULE_PATH "${kit-cmake}/modules")
     +FetchContent_Declare(linalg-cmake-modules SOURCE_DIR "${linalg-cmake-modules}")
 
      ###############################################################################
      # Announce ourselves
 
   '';
-
-  kit-cmake-src = fetchFromGitHub {
-    owner = "ValeevGroup";
-    repo = "kit-cmake";
-    rev = "869953d7c122535963af1949ebb854680b6849a3";
-    sha256 = "sha256-NbEP/NkXMRs1z5AB3ycXUAoiK9q4aZ0S3itSbWpNfB0=";
-  };
-
-  linalg-cmake-modules = fetchFromGitHub {
-    owner = "wavefunction91";
-    repo = "linalg-cmake-modules";
-    rev = "28ceaa9738f14935aa544289fa2fe4c4cc955d0e";
-    sha256 = "sha256-EGPubUYlZjgJRnUdtgCG+aKcmkpQk1m9N3VVYMgIwic=";
-  };
 
 in stdenv.mkDerivation rec {
   pname = "BTAS";
@@ -48,8 +34,10 @@ in stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "ValeevGroup";
     repo = pname;
-    rev = "33d22182c52c3c51099f17a8957872a5fd6a32e5";
-    sha256 = "sha256-E08M0uYSkyIRRJH0xTt2lKf+T/pPlEFdrRen+SQqnd0=";
+    #rev = "33d22182c52c3c51099f17a8957872a5fd6a32e5";
+    rev = "3c91f086090390930bba62c6512c4e74a5520e76";
+    #sha256 = "sha256-E08M0uYSkyIRRJH0xTt2lKf+T/pPlEFArRen+SQqnd0=";
+    sha256 = "sha256-FMKf6CFcD2LiiDBuFfpSMI+mVQlNNiq3J4wb9/kbkQM=";
   };
   buildInputs = [ boost openblas lapack cmake blaspp lapackpp ];
   doCheck = false;
@@ -62,6 +50,9 @@ in stdenv.mkDerivation rec {
     mkdir -p _deps/linalg-cmake-modules-src/
     cp -r ${linalg-cmake-modules} _deps/linalg-cmake-modules-src/
     cmake ../ -DCMAKE_INSTALL_PREFIX=$out
+  '';
+  installPhase = ''
+    make install
   '';
 
   meta = with lib; {
