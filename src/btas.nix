@@ -35,8 +35,8 @@ in stdenv.mkDerivation rec {
     owner = "ValeevGroup";
     repo = pname;
     #rev = "33d22182c52c3c51099f17a8957872a5fd6a32e5";
-    rev = "3c91f086090390930bba62c6512c4e74a5520e76";
     #sha256 = "sha256-E08M0uYSkyIRRJH0xTt2lKf+T/pPlEFArRen+SQqnd0=";
+    rev = "3c91f086090390930bba62c6512c4e74a5520e76";
     sha256 = "sha256-FMKf6CFcD2LiiDBuFfpSMI+mVQlNNiq3J4wb9/kbkQM=";
   };
   buildInputs = [ boost openblas lapack cmake blaspp lapackpp ];
@@ -46,7 +46,6 @@ in stdenv.mkDerivation rec {
     patch -u CMakeLists.txt -i ${patch}
     #cat CMakeLists.txt
     cd build
-    echo ${linalg-cmake-modules}
     mkdir -p _deps/linalg-cmake-modules-src/
     cp -r ${linalg-cmake-modules} _deps/linalg-cmake-modules-src/
     cmake ../ -DCMAKE_INSTALL_PREFIX=$out

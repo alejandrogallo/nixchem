@@ -28,6 +28,8 @@ let
     linalg-cmake-modules = callPackage ./src/linalg-cmake-modules.nix { };
     slate = callPackage ./src/slate.nix { };
     testsweeper = callPackage ./src/testsweeper.nix { };
+    #
+    xcrysden = callPackage ./src/xcrysden.nix { };
   };
 
 in self.nixchem

@@ -1,12 +1,12 @@
 { stdenv, lib, fetchFromGitHub, cmake, mpi, blaspp, lapackpp, writeText
-, gfortran, testsweeper }:
+, openblas, gfortran, testsweeper }:
 
 stdenv.mkDerivation rec {
 
   pname = "slate";
   version = "x.x.x";
   enableParallelBuilding = true;
-  buildInputs = [ cmake gfortran mpi blaspp lapackpp testsweeper ];
+  buildInputs = [ cmake gfortran mpi blaspp lapackpp testsweeper openblas ];
   src = fetchFromGitHub {
     owner = "icl-utk-edu";
     repo = pname;
