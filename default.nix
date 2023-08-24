@@ -26,6 +26,8 @@ let
     camp = callPackage ./src/camp.nix { };
     kit-cmake = callPackage ./src/kit-cmake.nix { };
     linalg-cmake-modules = callPackage ./src/linalg-cmake-modules.nix { };
+    slate = callPackage ./src/slate.nix { };
+    testsweeper = callPackage ./src/testsweeper.nix { };
   };
 
 in self.nixchem
